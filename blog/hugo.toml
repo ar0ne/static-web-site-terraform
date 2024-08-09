@@ -1,4 +1,4 @@
-baseURL = 'https://example.com/'
+baseURL = '/'
 languageCode = 'en-us'
 title = 'Notes'
 theme = 'archie'
@@ -34,6 +34,6 @@ weight = 3
 [deployment]
 
 [[deployment.targets]]
-name = "production"
 
-URL = "s3://dawdaodowadkdwodkwodkwdokwodkwodkwodkwodowjfofwofnwf"
+name = "production"
+URL = "s3://<YOUR_S3_BUCKET_NAME>" 
