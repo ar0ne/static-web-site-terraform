@@ -29,27 +29,27 @@ resource "aws_s3_bucket_acl" "blog" {
 }
 
 resource "aws_s3_bucket_policy" "public_available" {
-    bucket = aws_s3_bucket.blog.id
-    policy = data.aws_iam_policy_document.public_available.json
+  bucket = aws_s3_bucket.blog.id
+  policy = data.aws_iam_policy_document.public_available.json
 }
 
 
 data "aws_iam_policy_document" "public_available" {
-    statement {
-        actions = [
-            "s3:GetObject"
-        ]
+  statement {
+    actions = [
+      "s3:GetObject"
+    ]
 
-        principals {
-            type = "*"
-            identifiers = ["*"]
-        }
-
-        resources = [
-            "${aws_s3_bucket.blog.arn}/*"
-        ]
-
+    principals {
+      type        = "*"
+      identifiers = ["*"]
     }
+
+    resources = [
+      "${aws_s3_bucket.blog.arn}/*"
+    ]
+
+  }
 }
 
 
@@ -80,8 +80,8 @@ resource "aws_s3_object" "static_files" {
   key          = each.key
   content_type = each.value.content_type
 
-  source  = each.value.source_path
-  source_hash  = filemd5(each.value.source_path)
+  source      = each.value.source_path
+  source_hash = filemd5(each.value.source_path)
 }
 
 

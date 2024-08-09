@@ -1,7 +1,7 @@
 +++
 title = 'How to deploy static website to AWS S3 with terraform'
 date = 2024-08-09T19:34:29+04:00
-draft = true
+draft = false 
 +++
 
 To make your static website public available you could choose from many options on the market, e.g. *github-pages*, *aws s3-websites*, *gc storage*, *netlify* or any other services you prefer.
