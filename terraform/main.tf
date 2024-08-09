@@ -73,7 +73,7 @@ resource "aws_s3_bucket_website_configuration" "blog_configuration" {
   }
 }
 
-resource "aws_s3_bucket_object" "static_files" {
+resource "aws_s3_object" "static_files" {
   for_each = module.template_files.files
 
   bucket       = aws_s3_bucket.blog.bucket
@@ -81,8 +81,7 @@ resource "aws_s3_bucket_object" "static_files" {
   content_type = each.value.content_type
 
   source  = each.value.source_path
-  content = each.value.content
-
+  source_hash  = filemd5(each.value.source_path)
 }
 
 
