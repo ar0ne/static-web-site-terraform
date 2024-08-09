@@ -32,7 +32,7 @@ variable "cors_rules" {
 
 
 locals {
-  s3_bucket_name = "${var.environment}-bucket-${random_string.name.result}"
+  bucket_name = "${var.bucket_prefix}-bucket-${var.environment}-${random_string.name.result}"
 }
 
 

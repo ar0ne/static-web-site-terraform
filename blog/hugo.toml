@@ -1,4 +1,39 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://example.com/'
 languageCode = 'en-us'
-title = 'Welcome to my personal blog'
+title = 'Notes'
 theme = 'archie'
+copyright = ""
+
+[params]
+mode = "auto"
+useCDN = false
+
+[[params.social]]
+name = "GitHub"
+icon = "github"
+url  = "https://github.com/ar0ne"
+
+# Main menu Items
+
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[menu.main]]
+name = "All posts"
+url = "/posts"
+weight = 2
+
+[[menu.main]]
+name = "About"
+url = "/about"
+weight = 3
+
+
+[deployment]
+
+[[deployment.targets]]
+name = "production"
+
+URL = "s3://dawdaodowadkdwodkwodkwdokwodkwodkwodkwodowjfofwofnwf"

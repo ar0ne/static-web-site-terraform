@@ -1,7 +1,57 @@
 resource "aws_s3_bucket" "blog" {
-  bucket        = local.s3_bucket_name
-  bucket_prefix = var.bucket_prefix
+  bucket = local.bucket_name
 }
+
+resource "aws_s3_bucket_ownership_controls" "blog" {
+  bucket = aws_s3_bucket.blog.id
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "blog" {
+  bucket = aws_s3_bucket.blog.id
+
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+}
+
+resource "aws_s3_bucket_acl" "blog" {
+  depends_on = [
+    aws_s3_bucket_ownership_controls.blog,
+    aws_s3_bucket_public_access_block.blog,
+  ]
+
+  bucket = aws_s3_bucket.blog.id
+  acl    = "public-read"
+}
+
+resource "aws_s3_bucket_policy" "public_available" {
+    bucket = aws_s3_bucket.blog.id
+    policy = data.aws_iam_policy_document.public_available.json
+}
+
+
+data "aws_iam_policy_document" "public_available" {
+    statement {
+        actions = [
+            "s3:GetObject"
+        ]
+
+        principals {
+            type = "*"
+            identifiers = ["*"]
+        }
+
+        resources = [
+            "${aws_s3_bucket.blog.arn}/*"
+        ]
+
+    }
+}
+
 
 resource "random_string" "name" {
   length  = 16
